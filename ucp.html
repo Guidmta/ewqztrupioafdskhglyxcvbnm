@@ -18,7 +18,7 @@
             <span class="font-bold text-base tracking-wider text-white">SEELMTA</span>
         </div>
 
-        <!-- Kezdőlap gomb (visszadob a főoldalra) -->
+        <!-- Kezdőlap gomb -->
         <a href="index.html" class="bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white px-4 py-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-2 backdrop-blur shadow">
             ← Kezdőlap
         </a>
@@ -27,7 +27,7 @@
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-20">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET -->
+        <!-- 1. BEJELENTKEZÉS NÉZET (Ez fogad mindenkit alapból) -->
         <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
@@ -59,8 +59,8 @@
             </form>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT NÉZET -->
-        <div id="dashboardView" class="hidden w-full max-w-4xl space-y-8">
+        <!-- 2. VEZÉRLŐPULT NÉZET (Csak sikeres bejelentkezés után jelenik meg) -->
+        <div id="dashboardView" class="hidden w-full max-w-5xl space-y-8">
             <div class="flex justify-between items-center">
                 <h1 class="text-2xl md:text-3xl font-bold text-white tracking-wide">Üdvözlünk a Vezérlőpulton!</h1>
                 <button id="logoutBtn" class="bg-zinc-900/80 hover:bg-red-500/20 text-red-400 border border-zinc-800 hover:border-red-500/50 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
@@ -68,24 +68,30 @@
                 </button>
             </div>
 
-            <!-- 3 db kártya -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Adat kártyák (Serial váltás nélkül, pontosan a kért adatokkal) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Karakter Név kártya -->
-                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-md space-y-2">
-                    <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Karakter Név</span>
-                    <div id="displayUsername" class="text-xl font-bold text-white">Minta_Jatekos</div>
+                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-1">
+                    <span class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Karakter Név</span>
+                    <div id="displayUsername" class="text-lg font-bold text-white truncate">Minta_Jatekos</div>
+                </div>
+
+                <!-- Serial kártya -->
+                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-1">
+                    <span class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Serial</span>
+                    <div class="text-xs font-mono text-zinc-300 truncate bg-zinc-950/60 p-2 rounded-lg border border-zinc-800">11127EEDF5BDDBC4D4CCABDED3E13C72</div>
                 </div>
 
                 <!-- Készpénz kártya -->
-                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-md space-y-2">
-                    <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Készpénz</span>
-                    <div class="text-xl font-bold text-emerald-400">$ 150,000</div>
+                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-1">
+                    <span class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Készpénz</span>
+                    <div class="text-lg font-bold text-emerald-400">$ 307,500</div>
                 </div>
 
                 <!-- Játszott percek kártya -->
-                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-md space-y-2">
-                    <span class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Játszott percek</span>
-                    <div class="text-xl font-bold text-red-500">1,240 perc</div>
+                <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-1">
+                    <span class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Játszott percek</span>
+                    <div class="text-lg font-bold text-red-500">1,655 perc</div>
                 </div>
             </div>
         </div>
@@ -108,17 +114,20 @@
         const displayUsername = document.getElementById('displayUsername');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Automatikus belépés, ha van mentve adat
+        // Oldal betöltésekor mindig a Bejelentkezés látszik először (kivéve, ha az "Emlékezz rám" miatt mentve van)
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('seelmta_user');
             if (savedUser) {
                 displayUsername.textContent = savedUser;
                 loginView.classList.add('hidden');
                 dashboardView.classList.remove('hidden');
+            } else {
+                loginView.classList.remove('hidden');
+                dashboardView.classList.add('hidden');
             }
         });
 
-        // Bejelentkezés esemény
+        // Bejelentkezés gomb megnyomása
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const username = usernameInput.value;
@@ -132,7 +141,7 @@
             dashboardView.classList.remove('hidden');
         });
 
-        // Kijelentkezés
+        // Kijelentkezés gomb
         logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('seelmta_user');
             usernameInput.value = '';
