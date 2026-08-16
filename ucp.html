@@ -13,18 +13,41 @@
 
     <!-- Felső léc -->
     <div class="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-20 max-w-7xl mx-auto w-full">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 cursor-pointer" id="logoHomeBtn">
             <img src="logo.png" alt="SEELMTA Logo" class="w-8 h-8 object-contain">
-            <span class="font-bold text-base tracking-wider text-white">SEELMTA</span>
+            <span class="font-bold text-base tracking-wider text-white">SEELMTA.HU</span>
         </div>
-        <div></div>
+        <div class="flex items-center gap-6 text-xs font-medium text-zinc-300">
+            <a href="#" id="navUcpBtn" class="hover:text-white transition-colors">UCP</a>
+            <a href="#" class="hover:text-white transition-colors">Segítség</a>
+            <a href="#" class="hover:text-white transition-colors">Közösség</a>
+            <a href="#" class="hover:text-white transition-colors">Szerver Szabályzat</a>
+        </div>
     </div>
 
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-24">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET -->
-        <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
+        <!-- 1. FŐ KEZDŐLAP NÉZET -->
+        <div id="homeView" class="w-full max-w-4xl text-center space-y-8 my-auto">
+            <div class="flex flex-col items-center space-y-4">
+                <div class="w-16 h-16 bg-zinc-900/80 border border-zinc-800 rounded-2xl flex items-center justify-center shadow-xl">
+                    <span class="text-emerald-400 text-3xl font-bold">S</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-white">SEELMTA</h1>
+                <p class="text-xs md:text-sm text-zinc-400 max-w-md mx-auto">
+                    Kezd el a saját RP Karaktered a SEELMTA szerverén, és alakítsd úgy a karaktered - ahogyan szeretnéd!
+                </p>
+            </div>
+            <div>
+                <button id="ctaJoinBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-lg text-xs md:text-sm flex items-center gap-2 mx-auto">
+                    → Csatlakozz most
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. BEJELENTKEZÉS NÉZET -->
+        <div id="loginView" class="hidden w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
                 <p class="text-xs text-zinc-400">Add meg az adataid, melyekkel InGame regisztráltál.</p>
@@ -60,19 +83,16 @@
             </form>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET -->
+        <!-- 3. VEZÉRLŐPULT / PROFIL NÉZET -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
-            <!-- Felső név és Gombok (Kezdőlap + Kijelentkezés) -->
+            <!-- Felső név és Kijelentkezés gomb -->
             <div class="flex justify-between items-center bg-zinc-900/80 border border-zinc-800/80 p-6 rounded-2xl backdrop-blur-md">
                 <div>
                     <h1 id="profileTitle" class="text-xl font-bold text-white">Profil</h1>
                     <p class="text-xs text-zinc-400 mt-0.5">Account ID: <span class="text-zinc-200">0</span></p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button id="homeBtn" class="bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
-                        Kezdőlap
-                    </button>
+                <div>
                     <button id="logoutBtn" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
                         Kijelentkezés
                     </button>
@@ -135,7 +155,7 @@
                         </div>
                     </div>
 
-                    <!-- 1. KITILTÁSOK (0) -->
+                    <!-- KITILTÁSOK (0) -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                             <span>🚫</span> KITILTÁSOK (0)
@@ -146,7 +166,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. ADMINJAILEK (0) -->
+                    <!-- ADMINJAILEK (0) -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                             <span>⚖️</span> Adminjailek (0)
@@ -157,7 +177,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. KICKEK (0) -->
+                    <!-- KICKEK (0) -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                             <span>👤</span> KICKEK (0)
@@ -182,16 +202,21 @@
 
     <!-- Vezérlő logika -->
     <script>
+        const homeView = document.getElementById('homeView');
         const loginView = document.getElementById('loginView');
         const dashboardView = document.getElementById('dashboardView');
+        
         const loginForm = document.getElementById('loginForm');
         const usernameInput = document.getElementById('usernameInput');
         const passwordInput = document.getElementById('password');
         const rememberMe = document.getElementById('rememberMe');
         const profileTitle = document.getElementById('profileTitle');
         const charNameDisplay = document.getElementById('charNameDisplay');
+        
         const logoutBtn = document.getElementById('logoutBtn');
-        const homeBtn = document.getElementById('homeBtn');
+        const ctaJoinBtn = document.getElementById('ctaJoinBtn');
+        const navUcpBtn = document.getElementById('navUcpBtn');
+        const logoHomeBtn = document.getElementById('logoHomeBtn');
         const togglePassword = document.getElementById('togglePassword');
 
         // Jelszó láthatóság váltás (szem ikon)
@@ -205,18 +230,37 @@
             }
         });
 
-        // Betöltődéskor: MINDIG a login panelt mutatjuk, de ha volt mentett user, beírjuk és bepipáljuk
+        // Betöltődéskor az 1. Fő Kezdőlap jelenik meg
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('seelmta_remembered_user');
             if (savedUser) {
                 usernameInput.value = savedUser;
                 rememberMe.checked = true;
             }
-            loginView.classList.remove('hidden');
+            homeView.classList.remove('hidden');
+            loginView.classList.add('hidden');
             dashboardView.classList.add('hidden');
         });
 
-        // Bejelentkezés gomb kezelése
+        // Csatlakozz most vagy UCP gombra kattintva átmegy a Bejelentkező panelre
+        const goToLogin = (e) => {
+            e.preventDefault();
+            homeView.classList.add('hidden');
+            dashboardView.classList.add('hidden');
+            loginView.classList.remove('hidden');
+        };
+
+        ctaJoinBtn.addEventListener('click', goToLogin);
+        navUcpBtn.addEventListener('click', goToLogin);
+
+        // Logo-ra kattintva visszaugrik a főoldalra
+        logoHomeBtn.addEventListener('click', () => {
+            dashboardView.classList.add('hidden');
+            loginView.classList.add('hidden');
+            homeView.classList.remove('hidden');
+        });
+
+        // Bejelentkezés gomb kezelése (Átmegy a Dashboardra)
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const username = usernameInput.value.trim();
@@ -231,19 +275,14 @@
             charNameDisplay.textContent = username;
             
             loginView.classList.add('hidden');
+            homeView.classList.add('hidden');
             dashboardView.classList.remove('hidden');
         });
 
-        // Kijelentkezés gomb kezelése
+        // Kijelentkezés gomb kezelése (Visszadob a Login panelre)
         logoutBtn.addEventListener('click', () => {
             dashboardView.classList.add('hidden');
-            loginView.classList.remove('hidden');
-            passwordInput.value = '';
-        });
-
-        // Kezdőlap gomb kezelése (visszadob a loginra)
-        homeBtn.addEventListener('click', () => {
-            dashboardView.classList.add('hidden');
+            homeView.classList.add('hidden');
             loginView.classList.remove('hidden');
             passwordInput.value = '';
         });
