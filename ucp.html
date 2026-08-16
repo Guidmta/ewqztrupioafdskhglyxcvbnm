@@ -23,8 +23,8 @@
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-24">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET (Alapból látszik, ha nincsen mentve user) -->
-        <div id="loginView" class="hidden w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
+        <!-- 1. BEJELENTKEZÉS NÉZET (Alapból látszik) -->
+        <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
                 <p class="text-xs text-zinc-400">Add meg az adataid, melyekkel InGame regisztráltál.</p>
@@ -60,7 +60,7 @@
             </form>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Alapból rejtve, csak bejelentkezés után jön) -->
+        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Csak sikeres bejelentkezés után jön) -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
             <!-- Felső név és Kijelentkezés -->
@@ -203,7 +203,7 @@
             }
         });
 
-        // Betöltődéskor ellenőrzés (villogásmentesítve)
+        // Betöltődéskor: csak akkor lép be automatikusan, ha tényleg be van pipálva az "Emlékezz rám"
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('seelmta_logged_user');
             if (savedUser) {
