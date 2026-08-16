@@ -23,7 +23,7 @@
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-24">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET (MINDIG ez jön fel először) -->
+        <!-- 1. BEJELENTKEZÉS NÉZET -->
         <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
@@ -37,9 +37,8 @@
                 </div>
 
                 <div>
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="mb-2">
                         <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider">Jelszó</label>
-                        <a href="#" class="text-xs text-zinc-400 hover:text-zinc-200 transition-colors">Elfelejtett adatok?</a>
                     </div>
                     <div class="relative">
                         <input type="password" id="password" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500 transition-colors pr-10" placeholder="••••••••">
@@ -59,19 +58,9 @@
                     → Bejelentkezés
                 </button>
             </form>
-
-            <div class="relative flex py-2 items-center">
-                <div class="flex-grow border-t border-zinc-800"></div>
-                <span class="flex-shrink mx-4 text-zinc-600 text-[10px] uppercase tracking-widest font-semibold">VAGY</span>
-                <div class="flex-grow border-t border-zinc-800"></div>
-            </div>
-
-            <button type="button" class="w-full bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 text-zinc-300 font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 text-xs">
-                🔑 Bejelentkezés jelkulccsal
-            </button>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Csak a Bejelentkezés gomb után látszik) -->
+        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
             <!-- Felső név és Kijelentkezés -->
@@ -109,10 +98,6 @@
                                 <div class="flex justify-between text-zinc-400"><span>SlotCoins</span><span class="text-amber-400 font-bold">0 SC</span></div>
                                 <div class="flex justify-between text-zinc-400"><span>Utoljára használva</span><span class="text-zinc-300">-</span></div>
                             </div>
-
-                            <button class="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-semibold py-2.5 rounded-xl text-xs transition-colors mt-3">
-                                Karakter megtekintése
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -221,7 +206,6 @@
                 usernameInput.value = savedUser;
                 rememberMe.checked = true;
             }
-            // Biztosítjuk, hogy a login nézet legyen látható induláskor
             loginView.classList.remove('hidden');
             dashboardView.classList.add('hidden');
         });
@@ -231,7 +215,6 @@
             e.preventDefault();
             const username = usernameInput.value.trim();
 
-            // Ha be van pipálva az "Emlékezz rám", elmentjük a nevet
             if (rememberMe.checked) {
                 localStorage.setItem('seelmta_remembered_user', username);
             } else {
@@ -241,14 +224,12 @@
             profileTitle.textContent = username + ' profilja';
             charNameDisplay.textContent = username;
             
-            // Átváltunk a dashboardra
             loginView.classList.add('hidden');
             dashboardView.classList.remove('hidden');
         });
 
         // Kijelentkezés gomb kezelése
         logoutBtn.addEventListener('click', () => {
-            // Visszaváltunk a login panelre
             dashboardView.classList.add('hidden');
             loginView.classList.remove('hidden');
             passwordInput.value = '';
