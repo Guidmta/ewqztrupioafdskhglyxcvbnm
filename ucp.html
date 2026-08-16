@@ -18,7 +18,7 @@
             <span class="font-bold text-base tracking-wider text-white">SEELMTA</span>
         </div>
 
-        <!-- Kezdőlap gomb (visszadob a főoldalra) -->
+        <!-- Kezdőlap gomb (visszavisz az index.html-re) -->
         <a href="index.html" class="bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white px-4 py-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-2 backdrop-blur shadow">
             ← Kezdőlap
         </a>
@@ -27,7 +27,7 @@
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-24">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET (Ez látszik először) -->
+        <!-- 1. BEJELENTKEZÉS NÉZET (Alapból ez látszik minden UCP nyitáskor) -->
         <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
@@ -48,18 +48,13 @@
                     <input type="password" id="password" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500 transition-colors" placeholder="••••••••">
                 </div>
 
-                <div class="flex items-center gap-2 pt-1">
-                    <input type="checkbox" id="remember" class="rounded bg-zinc-950 border-zinc-800 text-red-500 focus:ring-0 w-4 h-4 cursor-pointer">
-                    <label for="remember" class="text-xs text-zinc-400 select-none cursor-pointer">Emlékezz rám</label>
-                </div>
-
                 <button type="submit" class="w-full bg-zinc-200 hover:bg-white text-zinc-950 font-semibold py-3 rounded-xl transition-colors shadow-lg flex items-center justify-center gap-2 text-sm mt-2">
                     Bejelentkezés
                 </button>
             </form>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Csak sikeres belépés után jelenik meg, pontosan a kért minták alapján) -->
+        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Csak sikeres belépés után jelenik meg) -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
             <!-- Felső név és Kijelentkezés -->
@@ -73,18 +68,16 @@
                 </button>
             </div>
 
-            <!-- Fő rács elrendezés (Balra karakter + adatok, Jobbra a többi panel) -->
+            <!-- Fő rács elrendezés -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                 <!-- Bal oszlop: Karakter kártya -->
                 <div class="space-y-6">
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-4">
-                        <!-- Karakter kép -->
                         <div class="w-full h-64 bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800 relative">
-                            <img src="hatter.png" alt="Karakter" class="w-full h-full object-cover">
+                            <img src="image_5b29c6.jpg" alt="Karakter" class="w-full h-full object-cover">
                         </div>
 
-                        <!-- Karakter adatok -->
                         <div class="space-y-2">
                             <div class="flex items-center gap-2 text-white font-bold text-sm">
                                 <span>👤</span> James William
@@ -107,7 +100,7 @@
                     </div>
                 </div>
 
-                <!-- Jobb oszlop: Információs panel blokkok (Serial váltás nélkül) -->
+                <!-- Jobb oszlop: Információs panel blokkok -->
                 <div class="lg:col-span-2 space-y-6">
                     
                     <!-- Felhasználói adatok blokk -->
@@ -128,7 +121,7 @@
                     <!-- Serial blokk -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-2">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                            <span>💻</span> Serial
+                            <span>💻</span> SERIAL
                         </div>
                         <div class="bg-zinc-950/80 border border-zinc-800 p-2.5 rounded-xl font-mono text-xs text-zinc-300 text-center tracking-widest">
                             11127EEDF5BDDBC4D4CCABDED3E13C72
@@ -140,19 +133,19 @@
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
                             <span>🚫</span> Kitiltások (0)
                         </div>
-                        <div class="py-8 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
-                            <span class="text-xl">Ø</span>
+                        <div class="py-6 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
+                            <span class="text-lg">Ø</span>
                             Nincs találat
                         </div>
                     </div>
 
-                    <!-- Adminjailek -->
+                    <!-- Kickek -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                            <span>⚖️</span> Adminjailek (0)
+                            <span>👤</span> Kickek (0)
                         </div>
-                        <div class="py-8 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
-                            <span class="text-xl">Ø</span>
+                        <div class="py-6 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
+                            <span class="text-lg">Ø</span>
                             Nincs találat
                         </div>
                     </div>
@@ -176,31 +169,19 @@
         const loginForm = document.getElementById('loginForm');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
-        const rememberCheckbox = document.getElementById('remember');
         const profileName = document.getElementById('profileName');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Oldal betöltésekor ellenőrzés
+        // Oldal betöltésekor MINDIG a bejelentkező panel jön először (nincs automatikus belépés)
         window.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('seelmta_user');
-            if (savedUser) {
-                profileName.textContent = savedUser + ' profilja';
-                loginView.classList.add('hidden');
-                dashboardView.classList.remove('hidden');
-            } else {
-                loginView.classList.remove('hidden');
-                dashboardView.classList.add('hidden');
-            }
+            loginView.classList.remove('hidden');
+            dashboardView.classList.add('hidden');
         });
 
         // Bejelentkezés esemény
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const username = usernameInput.value;
-
-            if (rememberCheckbox.checked) {
-                localStorage.setItem('seelmta_user', username);
-            }
 
             profileName.textContent = username + ' profilja';
             loginView.classList.add('hidden');
@@ -209,10 +190,8 @@
 
         // Kijelentkezés
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('seelmta_user');
             usernameInput.value = '';
             passwordInput.value = '';
-            rememberCheckbox.checked = false;
             dashboardView.classList.add('hidden');
             loginView.classList.remove('hidden');
         });
