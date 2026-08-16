@@ -63,15 +63,20 @@
         <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
-            <!-- Felső név és Kijelentkezés -->
+            <!-- Felső név és Gombok (Kezdőlap + Kijelentkezés) -->
             <div class="flex justify-between items-center bg-zinc-900/80 border border-zinc-800/80 p-6 rounded-2xl backdrop-blur-md">
                 <div>
                     <h1 id="profileTitle" class="text-xl font-bold text-white">Profil</h1>
                     <p class="text-xs text-zinc-400 mt-0.5">Account ID: <span class="text-zinc-200">0</span></p>
                 </div>
-                <button id="logoutBtn" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
-                    Kijelentkezés
-                </button>
+                <div class="flex items-center gap-3">
+                    <button id="homeBtn" class="bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
+                        Kezdőlap
+                    </button>
+                    <button id="logoutBtn" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
+                        Kijelentkezés
+                    </button>
+                </div>
             </div>
 
             <!-- Fő rács elrendezés -->
@@ -186,6 +191,7 @@
         const profileTitle = document.getElementById('profileTitle');
         const charNameDisplay = document.getElementById('charNameDisplay');
         const logoutBtn = document.getElementById('logoutBtn');
+        const homeBtn = document.getElementById('homeBtn');
         const togglePassword = document.getElementById('togglePassword');
 
         // Jelszó láthatóság váltás (szem ikon)
@@ -230,6 +236,13 @@
 
         // Kijelentkezés gomb kezelése
         logoutBtn.addEventListener('click', () => {
+            dashboardView.classList.add('hidden');
+            loginView.classList.remove('hidden');
+            passwordInput.value = '';
+        });
+
+        // Kezdőlap gomb kezelése (visszadob a loginra)
+        homeBtn.addEventListener('click', () => {
             dashboardView.classList.add('hidden');
             loginView.classList.remove('hidden');
             passwordInput.value = '';
