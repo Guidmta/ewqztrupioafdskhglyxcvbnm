@@ -18,7 +18,7 @@
             <span class="font-bold text-base tracking-wider text-white">SEELMTA</span>
         </div>
 
-        <!-- Kezdőlap gomb (visszavisz az index.html-re) -->
+        <!-- Kezdőlap gomb -->
         <a href="index.html" class="bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white px-4 py-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-2 backdrop-blur shadow">
             ← Kezdőlap
         </a>
@@ -27,7 +27,7 @@
     <!-- Fő tartalom konténer -->
     <div class="relative z-10 flex flex-col items-center justify-center flex-grow w-full px-4 py-24">
 
-        <!-- 1. BEJELENTKEZÉS NÉZET (Alapból ez látszik minden UCP nyitáskor) -->
+        <!-- 1. BEJELENTKEZÉS NÉZET -->
         <div id="loginView" class="w-full max-w-md p-8 bg-zinc-900/90 border border-zinc-800/80 rounded-3xl shadow-2xl backdrop-blur-md space-y-6">
             <div class="text-center space-y-1">
                 <h2 class="text-xl font-bold text-white tracking-wide">Bejelentkezés</h2>
@@ -37,7 +37,7 @@
             <form id="loginForm" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Felhasználónév</label>
-                    <input type="text" id="username" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500 transition-colors placeholder:text-zinc-600" placeholder="Felhasználónév...">
+                    <input type="text" id="usernameInput" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500 transition-colors placeholder:text-zinc-600" placeholder="Felhasználónév...">
                 </div>
 
                 <div>
@@ -48,20 +48,26 @@
                     <input type="password" id="password" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500 transition-colors" placeholder="••••••••">
                 </div>
 
+                <!-- Emlékezz rám pipa -->
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="rememberMe" class="rounded bg-zinc-950 border-zinc-800 text-red-500 focus:ring-0 w-4 h-4 cursor-pointer">
+                    <label for="rememberMe" class="text-xs text-zinc-400 select-none cursor-pointer">Emlékezz rám</label>
+                </div>
+
                 <button type="submit" class="w-full bg-zinc-200 hover:bg-white text-zinc-950 font-semibold py-3 rounded-xl transition-colors shadow-lg flex items-center justify-center gap-2 text-sm mt-2">
                     Bejelentkezés
                 </button>
             </form>
         </div>
 
-        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET (Csak sikeres belépés után jelenik meg) -->
+        <!-- 2. VEZÉRLŐPULT / PROFIL NÉZET -->
         <div id="dashboardView" class="hidden w-full max-w-6xl space-y-6">
             
             <!-- Felső név és Kijelentkezés -->
             <div class="flex justify-between items-center bg-zinc-900/80 border border-zinc-800/80 p-6 rounded-2xl backdrop-blur-md">
                 <div>
-                    <h1 id="profileName" class="text-xl font-bold text-white">Elo2009 profilja</h1>
-                    <p class="text-xs text-zinc-400 mt-0.5">Account ID: <span class="text-zinc-200">1681</span></p>
+                    <h1 id="profileTitle" class="text-xl font-bold text-white">Profil</h1>
+                    <p class="text-xs text-zinc-400 mt-0.5">Account ID: <span class="text-zinc-200">0</span></p>
                 </div>
                 <button id="logoutBtn" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-2 rounded-xl text-xs font-medium transition-colors">
                     Kijelentkezés
@@ -80,17 +86,17 @@
 
                         <div class="space-y-2">
                             <div class="flex items-center gap-2 text-white font-bold text-sm">
-                                <span>👤</span> James William
+                                <span>👤</span> <span id="charNameDisplay">Nincs karakter</span>
                             </div>
                             <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider border-b border-zinc-800 pb-1">Karakter információk</div>
                             
                             <div class="space-y-1.5 text-xs">
-                                <div class="flex justify-between text-zinc-400"><span>Karakter ID</span><span class="text-zinc-200 font-mono">1681</span></div>
-                                <div class="flex justify-between text-zinc-400"><span>Játszott idő</span><span class="text-zinc-200 font-semibold">1 655 perc (LVL 5)</span></div>
-                                <div class="flex justify-between text-zinc-400"><span>Készpénz</span><span class="text-emerald-400 font-bold">307 500 $</span></div>
-                                <div class="flex justify-between text-zinc-400"><span>Bankszámla</span><span class="text-red-400 font-bold">-9 045 $</span></div>
-                                <div class="flex justify-between text-zinc-400"><span>SlotCoins</span><span class="text-amber-400 font-bold">3 887 679 SC</span></div>
-                                <div class="flex justify-between text-zinc-400"><span>Utoljára használva</span><span class="text-zinc-300">2026. 08. 16. 17:16</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>Karakter ID</span><span class="text-zinc-200 font-mono">0</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>Játszott idő</span><span class="text-zinc-200 font-semibold">0 perc (LVL 0)</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>Készpénz</span><span class="text-emerald-400 font-bold">0 $</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>Bankszámla</span><span class="text-red-400 font-bold">0 $</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>SlotCoins</span><span class="text-amber-400 font-bold">0 SC</span></div>
+                                <div class="flex justify-between text-zinc-400"><span>Utoljára használva</span><span class="text-zinc-300">-</span></div>
                             </div>
 
                             <button class="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-semibold py-2.5 rounded-xl text-xs transition-colors mt-3">
@@ -110,10 +116,10 @@
                         </div>
                         <div class="text-[11px] text-zinc-500 uppercase">Általános Információk</div>
                         <div class="space-y-2 text-xs border-t border-zinc-800 pt-3">
-                            <div class="flex justify-between"><span class="text-zinc-400">Email</span><span class="text-zinc-200">elohalasz2020@gmail.com</span></div>
-                            <div class="flex justify-between"><span class="text-zinc-400">Utoljára online</span><span class="text-zinc-200">2026. 08. 16. 16:59</span></div>
-                            <div class="flex justify-between"><span class="text-zinc-400">Regisztráció</span><span class="text-zinc-200">2024. 09. 02. 19:47</span></div>
-                            <div class="flex justify-between"><span class="text-zinc-400">Prémium egyenleg</span><span class="text-cyan-400 font-semibold">440 PP</span></div>
+                            <div class="flex justify-between"><span class="text-zinc-400">Email</span><span id="emailDisplay" class="text-zinc-200">nincs megadva</span></div>
+                            <div class="flex justify-between"><span class="text-zinc-400">Utoljára online</span><span class="text-zinc-200">-</span></div>
+                            <div class="flex justify-between"><span class="text-zinc-400">Regisztráció</span><span class="text-zinc-200">-</span></div>
+                            <div class="flex justify-between"><span class="text-zinc-400">Prémium egyenleg</span><span class="text-cyan-400 font-semibold">0 PP</span></div>
                             <div class="flex justify-between"><span class="text-zinc-400">Kétlépcsős azonosítás</span><span class="text-red-400 font-semibold">Kikapcsolva</span></div>
                         </div>
                     </div>
@@ -124,14 +130,14 @@
                             <span>💻</span> SERIAL
                         </div>
                         <div class="bg-zinc-950/80 border border-zinc-800 p-2.5 rounded-xl font-mono text-xs text-zinc-300 text-center tracking-widest">
-                            11127EEDF5BDDBC4D4CCABDED3E13C72
+                            0
                         </div>
                     </div>
 
-                    <!-- Kitiltások -->
+                    <!-- 1. KITILTÁSOK (0) -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                            <span>🚫</span> Kitiltások (0)
+                            <span>🚫</span> KITILTÁSOK (0)
                         </div>
                         <div class="py-6 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
                             <span class="text-lg">Ø</span>
@@ -139,10 +145,21 @@
                         </div>
                     </div>
 
-                    <!-- Kickek -->
+                    <!-- 2. ADMINJAILEK (0) -->
                     <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
                         <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
-                            <span>👤</span> Kickek (0)
+                            <span>⚖️</span> Adminjailek (0)
+                        </div>
+                        <div class="py-6 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
+                            <span class="text-lg">Ø</span>
+                            Nincs találat
+                        </div>
+                    </div>
+
+                    <!-- 3. KICKEK (0) -->
+                    <div class="bg-zinc-900/90 border border-zinc-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-md space-y-3">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase tracking-wider">
+                            <span>👤</span> KICKEK (0)
                         </div>
                         <div class="py-6 text-center text-zinc-500 text-xs flex flex-col items-center justify-center gap-1">
                             <span class="text-lg">Ø</span>
@@ -167,31 +184,49 @@
         const loginView = document.getElementById('loginView');
         const dashboardView = document.getElementById('dashboardView');
         const loginForm = document.getElementById('loginForm');
-        const usernameInput = document.getElementById('username');
+        const usernameInput = document.getElementById('usernameInput');
         const passwordInput = document.getElementById('password');
-        const profileName = document.getElementById('profileName');
+        const rememberMe = document.getElementById('rememberMe');
+        const profileTitle = document.getElementById('profileTitle');
+        const charNameDisplay = document.getElementById('charNameDisplay');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Oldal betöltésekor MINDIG a bejelentkező panel jön először (nincs automatikus belépés)
+        // Oldal betöltésekor MINDIG a bejelentkező panel jön először, kivéve ha az "Emlékezz rám" aktív volt
         window.addEventListener('DOMContentLoaded', () => {
-            loginView.classList.remove('hidden');
-            dashboardView.classList.add('hidden');
+            const savedUser = localStorage.getItem('seelmta_logged_user');
+            if (savedUser) {
+                profileTitle.textContent = savedUser + ' profilja';
+                charNameDisplay.textContent = savedUser;
+                loginView.classList.add('hidden');
+                dashboardView.classList.remove('hidden');
+            } else {
+                loginView.classList.remove('hidden');
+                dashboardView.classList.add('hidden');
+            }
         });
 
         // Bejelentkezés esemény
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const username = usernameInput.value;
+            const username = usernameInput.value.trim();
 
-            profileName.textContent = username + ' profilja';
+            if (rememberMe.checked) {
+                localStorage.setItem('seelmta_logged_user', username);
+            }
+
+            profileTitle.textContent = username + ' profilja';
+            charNameDisplay.textContent = username;
+            
             loginView.classList.add('hidden');
             dashboardView.classList.remove('hidden');
         });
 
         // Kijelentkezés
         logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('seelmta_logged_user');
             usernameInput.value = '';
             passwordInput.value = '';
+            rememberMe.checked = false;
             dashboardView.classList.add('hidden');
             loginView.classList.remove('hidden');
         });
